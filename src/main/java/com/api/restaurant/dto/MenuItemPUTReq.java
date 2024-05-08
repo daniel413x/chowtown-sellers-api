@@ -14,4 +14,7 @@ public class MenuItemPUTReq {
     private String name;
 
     private Integer price;
+
+    private String id;
+
 }

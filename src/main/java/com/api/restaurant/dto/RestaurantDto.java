@@ -34,6 +34,8 @@ public class RestaurantDto {
 
     private String imageUrl;
 
+    private String slug;
+
     private Boolean isActivatedByUser;
 
     private LocalDateTime lastUpdated;

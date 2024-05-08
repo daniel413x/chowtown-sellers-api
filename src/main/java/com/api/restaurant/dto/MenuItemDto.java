@@ -14,4 +14,6 @@ public class MenuItemDto {
     private String name;
 
     private Integer price;
+
+    private String id;
 }

@@ -50,7 +50,6 @@ public class RestaurantRoutesHandler extends BaseHandler {
     public Mono<ServerResponse> update(ServerRequest req) {
         String authorizationHeader = req.headers().firstHeader("Authorization");
         String auth0id = req.pathVariable("auth0id");
-        System.out.println(auth0id);
         return req.bodyToMono(RestaurantPUTReq.class)
                 .flatMap(body -> this.webClient.put()
                         .uri("/" + auth0id)
@@ -58,11 +57,9 @@ public class RestaurantRoutesHandler extends BaseHandler {
                         .contentType(MediaType.APPLICATION_JSON)
                         .bodyValue(body)
                         .exchangeToMono(response -> {
-                            return response.bodyToMono(RestaurantDto.class)
-                                    .flatMap(restaurantDto -> ServerResponse
-                                            .status(response.statusCode())
-                                            .contentType(MediaType.APPLICATION_JSON)
-                                            .bodyValue(restaurantDto));
+                            return ServerResponse
+                                    .noContent()
+                                    .build();
                         }))
                 .onErrorResume(this::handleResponseError);
     }
