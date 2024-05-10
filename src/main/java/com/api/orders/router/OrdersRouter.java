@@ -17,6 +17,8 @@ public class OrdersRouter {
                 .route()
                 .nest(RequestPredicates.path("/api/orders"), builder -> {
                     builder.GET("/get-restaurant-orders", orderRoutesHandler::getRestaurantOrders);
+                    builder.GET("/get-order-user/{id}", orderRoutesHandler::getOrderUser);
+                    builder.PATCH("/{id}/status", orderRoutesHandler::patchOrderStatus);
                 })
                 .build();
     }

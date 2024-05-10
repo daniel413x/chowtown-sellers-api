@@ -14,20 +14,7 @@ import reactor.core.publisher.Mono;
 public class UserRoutesHandler extends BaseHandler {
 
     public UserRoutesHandler() {
-        initializeWebClient(System.getenv("USER_SVC_ADDRESS"));
-    }
-
-    public Mono<ServerResponse> getById(ServerRequest req) {
-        String id = req.pathVariable("id");
-        String authorizationHeader = req.headers().firstHeader("Authorization");
-        return this.webClient.get()
-                        .uri("/" + id)
-                        .header("Authorization", authorizationHeader)
-                        .retrieve()
-                        .bodyToMono(UserDto.class)
-                        .flatMap(userDto ->
-                                ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).bodyValue(userDto))
-                        .onErrorResume(this::handleResponseError);
+        initializeWebClient(System.getenv("CMS_USER_SVC_ADDRESS"));
     }
 
     public Mono<ServerResponse> create(ServerRequest req) {
